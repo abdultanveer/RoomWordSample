@@ -1,5 +1,6 @@
 package com.example.roomwordsample
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WORDS_
         }
 
         companion object {
+
             fun create(parent: ViewGroup): WordViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recyclerview_item, parent, false)
@@ -37,12 +39,19 @@ class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WORDS_
     }
 
     companion object {
+        var TAG = WordListAdapter::class.java.simpleName
+
         private val WORDS_COMPARATOR = object : DiffUtil.ItemCallback<Word>() {
             override fun areItemsTheSame(oldItem: Word, newItem: Word): Boolean {
+                Log.i(TAG,"areItemsTheSame"+newItem.word)
+
                 return oldItem === newItem
+
             }
 
             override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {
+                Log.i(TAG,"areContentsTheSame"+newItem.word)
+
                 return oldItem.word == newItem.word
             }
         }

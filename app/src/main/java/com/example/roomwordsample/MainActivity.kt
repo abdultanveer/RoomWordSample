@@ -3,6 +3,7 @@ package com.example.roomwordsample
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
+
+    companion object{
+        var TAG = MainActivity::class.java.simpleName
+    }
 
     private val newWordActivityRequestCode = 1
     private val wordViewModel: WordViewModel by viewModels {
@@ -37,8 +42,10 @@ class MainActivity : AppCompatActivity() {
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
-        wordViewModel.allWords.observe(owner = this) { words ->
+        wordViewModel.allWords.observe(owner = this) { words ->   //im registering activity as an observer with the viewmodel
             // Update the cached copy of the words in the adapter.
+            Log.i(TAG,"added word is--"+words.get(words.size-1).word)
+
             words.let { adapter.submitList(it) }
         }
     }
