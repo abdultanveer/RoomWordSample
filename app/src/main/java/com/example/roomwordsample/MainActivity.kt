@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
+    private var myAquarium: Aquarium? = null
 
     companion object{
         var TAG = MainActivity::class.java.simpleName
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        myAquarium = Aquarium(this.application,lifecycle)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = WordListAdapter()
@@ -41,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
-        // in the foreground.
+        // in the foreground. mainactivity is subscribing to viewmodel
         wordViewModel.allWords.observe(owner = this) { words ->   //im registering activity as an observer with the viewmodel
             // Update the cached copy of the words in the adapter.
             Log.i(TAG,"added word is--"+words.get(words.size-1).word)

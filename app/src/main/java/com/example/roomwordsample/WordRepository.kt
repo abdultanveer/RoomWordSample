@@ -9,6 +9,7 @@ class WordRepository(private val wordDao: WordDao) {
         var TAG = WordRepository::class.java.simpleName
     }
 
+    //check if internet is there
     var allWords: Flow<List<Word>> = wordDao.getAlphabetizedWords()
 
     @Suppress("RedundantSuspendModifier")
