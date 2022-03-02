@@ -1,6 +1,7 @@
 package com.example.roomwordsample
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         WordViewModelFactory((application as WordsApplication).repository)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,8 +39,9 @@ class MainActivity : AppCompatActivity() {
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, NewWordActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
+           /* val intent = Intent(this@MainActivity, NewWordActivity::class.java)
+            startActivityForResult(intent, newWordActivityRequestCode)*/
+            pleaseShowToast("fab was clicked")
         }
 
 
@@ -62,11 +65,16 @@ class MainActivity : AppCompatActivity() {
                 wordViewModel.insert(word)
             }
         } else {
+            pleaseShowToast("this is my message")
             Toast.makeText(
                 applicationContext,
                 R.string.empty_not_saved,
                 Toast.LENGTH_LONG
             ).show()
         }
+    }
+
+    fun Context.pleaseShowToast(message: String){
+        Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
     }
 }
