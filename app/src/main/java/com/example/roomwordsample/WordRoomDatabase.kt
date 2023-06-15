@@ -25,7 +25,7 @@ abstract class WordRoomDatabase : RoomDatabase() {
                     var wordDao = database.wordDao()
 
                     // Delete all content here.
-                    wordDao.deleteAll()
+                   // wordDao.deleteAll()
 
                     // Add sample words.
                     var word = Word("Hello")
